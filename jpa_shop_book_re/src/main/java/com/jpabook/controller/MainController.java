@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 @GetMapping("/")
 public String main() {
-	return "layouts/layout1";
+	return "main";
 }
 }
