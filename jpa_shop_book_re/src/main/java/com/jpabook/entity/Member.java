@@ -46,7 +46,7 @@ public static Member createMember(MemberFormDto memberFormDto,PasswordEncoder pa
 	String password=passwordEncoder.encode(memberFormDto.getPassword());
 	member.setPassword(password);
 	member.setAddress(memberFormDto.getAddress());
-	member.setRole(Role.USER);
+	member.setRole(Role.ADMIN);
 	return member;
 }
 }
