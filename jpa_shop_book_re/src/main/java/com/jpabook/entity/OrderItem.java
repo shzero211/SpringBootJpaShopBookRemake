@@ -16,7 +16,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class OrderItem {
+public class OrderItem extends BaseEntity {
 @Id
 @GeneratedValue(strategy = GenerationType.AUTO)
 private Long id;
@@ -31,6 +31,5 @@ private Order order;
 
 private int orderPrice;
 private int count;
-private LocalDateTime regTime;
-private LocalDateTime updateTime;
+
 }
