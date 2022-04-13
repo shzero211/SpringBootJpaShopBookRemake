@@ -38,10 +38,11 @@ private List<Long> itemImgIds=new ArrayList<>();
 
 private static ModelMapper modelMapper=new ModelMapper();
 
-public Item createItem() {
+public  Item createItem() {
 	return modelMapper.map(this,Item.class);
 }
-public ItemFormDto of(Item item) {
+
+public static ItemFormDto of(Item item) {
 	return modelMapper.map(item,ItemFormDto.class);
 }
 }
