@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.jpabook.dto.ItemFormDto;
 import com.jpabook.dto.ItemSearchDto;
+import com.jpabook.dto.MainItemDto;
 import com.jpabook.entity.Item;
 import com.jpabook.service.ItemService;
 
@@ -97,5 +98,14 @@ public class ItemController {
 		return "item/itemMng";
 	}
 	
+	@GetMapping(value = "/")
+	public String main(ItemSearchDto itemSearchDto,Optional<Integer> page,Model model) {
+		Pageable pageable=PageRequest.of(page.isPresent()?page.get():0, 6);
+		Page<MainItemDto> items=itemService.getMainItemPage(itemSearchDto, pageable);
+		model.addAttribute("items",items);
+		model.addAttribute("itemSearchDto",itemSearchDto);
+		model.addAttribute("maxPage",5);
+		return "main";
+	}
 	
 }

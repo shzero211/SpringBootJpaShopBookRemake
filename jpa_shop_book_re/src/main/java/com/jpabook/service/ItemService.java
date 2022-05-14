@@ -15,10 +15,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.jpabook.dto.ItemFormDto;
 import com.jpabook.dto.ItemImgDto;
 import com.jpabook.dto.ItemSearchDto;
+import com.jpabook.dto.MainItemDto;
 import com.jpabook.entity.Item;
 import com.jpabook.entity.ItemImg;
 import com.jpabook.repository.ItemImgRepository;
 import com.jpabook.repository.ItemRepository;
+import com.jpabook.repository.ItemRepositoryCustom;
 
 import lombok.RequiredArgsConstructor;
 
@@ -73,5 +75,9 @@ public Long updateItem(ItemFormDto itemFormDto,List<MultipartFile> itemImgFileLi
 
 public Page<Item> getAdminItemPage(ItemSearchDto itemSearchDto,Pageable pageable){
 	return itemRepository.getAdminItemPage(itemSearchDto, pageable);
+}
+
+public Page<MainItemDto> getMainItemPage(ItemSearchDto itemSearchDto,Pageable pageable){
+	return itemRepository.getMainItemPage(itemSearchDto, pageable);
 }
 }
