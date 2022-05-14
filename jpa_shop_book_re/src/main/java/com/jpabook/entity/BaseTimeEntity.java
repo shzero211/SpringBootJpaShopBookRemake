@@ -19,7 +19,7 @@ import lombok.Setter;
 public abstract class BaseTimeEntity {
 	
 @CreatedDate
-private LocalDateTime regtime;
+private LocalDateTime regTime;
 @LastModifiedDate
 private LocalDateTime updateTime;
 }

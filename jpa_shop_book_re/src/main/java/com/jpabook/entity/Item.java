@@ -23,7 +23,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Item {
+public class Item extends BaseEntity{
 	
 @Id
 @Column(name = "item_id")
@@ -38,6 +38,7 @@ private int price;
 
 @Column(nullable = false)
 private int stockNumber;
+
 @Lob
 @Column(nullable = false)
 private String itemDetail;
@@ -45,9 +46,6 @@ private String itemDetail;
 @Enumerated(EnumType.STRING)
 private ItemSellStatus itemSellStatus;
 
-private LocalDateTime regTime;
-
-private LocalDateTime updateTime;
 
 public void updateItem(ItemFormDto itemFormDto) {
 	this.itemNm=itemFormDto.getItemNm();

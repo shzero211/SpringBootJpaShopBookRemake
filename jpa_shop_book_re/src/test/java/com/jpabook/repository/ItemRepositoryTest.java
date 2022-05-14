@@ -25,6 +25,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 @Transactional
 @TestPropertySource(locations = "classpath:application-test.properties")
 class ItemRepositoryTest {
+	/**
 	@Autowired
 	private ItemRepository itemRepository;
 	@PersistenceContext
@@ -37,7 +38,7 @@ public void createItemTest() {
 	item.setPrice(10000);
 	item.setItemSellStatus(ItemSellStatus.SELL);
 	item.setStockNumber(100);
-	item.setRegTime(LocalDateTime.now());
+	item.setRegtime(LocalDateTime.now());
 	item.setUpdateTime(LocalDateTime.now());
 	item.setItemDetail("테스트 상품 상세");
 	Item savedItem=itemRepository.save(item);
@@ -52,7 +53,7 @@ public void createItemList() {
 		item.setItemDetail("테스트 상품 상세"+i);
 		item.setItemSellStatus(ItemSellStatus.SELL);
 		item.setStockNumber(100);
-		item.setRegTime(LocalDateTime.now());
+		item.setRegtime(LocalDateTime.now());
 		item.setUpdateTime(LocalDateTime.now());
 		Item savedItem=itemRepository.save(item);
 	}
@@ -121,5 +122,5 @@ public void queryDslTest() {
 	for(Item item:itemList) {
 		System.out.println(item.toString());
 	}
-}
+}**/
 }
