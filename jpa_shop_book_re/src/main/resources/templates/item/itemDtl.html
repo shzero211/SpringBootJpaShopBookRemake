@@ -2,10 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout1}">
 
 <head>
-<!--  
 <meta th:name="_csrf" th:content="${_csrf.token}"/>
 <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
--->
 </head>
 
 <!-- 사용자 스크립트 추가 -->
@@ -44,11 +42,11 @@
 				data : param,
 				beforeSend : function(xhr) {
 					/* 데이터를 전송하기 전에 헤더에 csrf 값을 설정 */
-					/*
+					
 					var token = $("meta[name='_csrf']").attr("content"); 
 					var header = $("meta[name='_csrf_header']").attr("content");
 					xhr.setRequestHeader(header, token);
-					*/
+					
 				},
 				dataType : "json",
 				cache : false,
@@ -83,11 +81,11 @@
 				contentType	:	"application/json",
 				data		:	param,
 				beforeSend	:	function(xhr){
-					/*
+					
 					var token = $("meta[name='_csrf']").attr("content");
 					var header = $("meta[name='_csrf_header']").attr("content");
 					xhr.setRequestHeader(header,token);
-					*/
+					
 				},
 				dataType	:	"json",
 				cache	:	false,

@@ -23,7 +23,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	private MemberService memberService;
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable();
 		//로그인 관련설정
 		http.formLogin()
 		.loginPage("/members/login")
@@ -33,7 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.and()
 		.logout()
 		.logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
-		.logoutSuccessUrl("/");
+		.logoutSuccessUrl("/")
+		.and().csrf().ignoringAntMatchers("/order/**");
 		
 		//권한설정
 		http.authorizeRequests()
