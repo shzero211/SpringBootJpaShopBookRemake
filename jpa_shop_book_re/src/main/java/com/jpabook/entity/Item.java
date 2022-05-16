@@ -14,6 +14,7 @@ import javax.persistence.Lob;
 
 import com.jpabook.constant.ItemSellStatus;
 import com.jpabook.dto.ItemFormDto;
+import com.jpabook.exception.OutOfStockException;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -53,5 +54,13 @@ public void updateItem(ItemFormDto itemFormDto) {
 	this.stockNumber=itemFormDto.getStockNumber();
 	this.itemDetail=itemFormDto.getItemDetail();
 	this.itemSellStatus=itemFormDto.getItemSellStatus();
+}
+
+public void removeStock(int stockNumber) {
+	int restStockNumber=this.stockNumber-stockNumber;
+	if(restStockNumber<0) {
+	throw new OutOfStockException("상품의 재고가 부족합니다.(현재 재고 수량: "+this.stockNumber+")");
+	}
+	this.stockNumber=restStockNumber;
 }
 }

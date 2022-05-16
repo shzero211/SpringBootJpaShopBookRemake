@@ -27,7 +27,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "orders")
-public class Order {
+public class Order extends BaseEntity{
 @Id
 @GeneratedValue(strategy =GenerationType.AUTO)
 @Column(name = "order_id")
@@ -46,7 +46,27 @@ private LocalDateTime orderDate;
 @Enumerated(EnumType.STRING)
 private OrderStatus orderStatus;
 
-private LocalDateTime regTime;
+public void addOrderItem(OrderItem orderItem) {
+	orderItems.add(orderItem);
+	orderItem.setOrder(this);
+}
 
-private LocalDateTime updateTime;
+public static Order createOrder(Member member,List<OrderItem> orderItemList) {
+	Order order =new Order();
+	order.setMember(member);
+	for(OrderItem orderItem:orderItemList) {
+		order.addOrderItem(orderItem);
+	}
+	order.setOrderStatus(OrderStatus.ORDER);
+	order.setOrderDate(LocalDateTime.now());
+	return order;
+}
+
+public int getTotalPrice() {
+	int totalPrice=0;
+	for(OrderItem orderItem:orderItems) {
+		totalPrice+=orderItem.getTotalPrice();
+	}
+	return totalPrice;
+}
 }
