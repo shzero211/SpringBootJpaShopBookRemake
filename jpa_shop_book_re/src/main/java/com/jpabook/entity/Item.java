@@ -63,4 +63,7 @@ public void removeStock(int stockNumber) {
 	}
 	this.stockNumber=restStockNumber;
 }
+public void addStock(int stockNumber) {
+	this.stockNumber+=stockNumber;
+}
 }

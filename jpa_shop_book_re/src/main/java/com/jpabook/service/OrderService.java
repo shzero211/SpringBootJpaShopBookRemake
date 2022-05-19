@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.util.StringUtils;
 
 import com.jpabook.dto.OrderDto;
 import com.jpabook.dto.OrderHistDto;
@@ -63,5 +64,18 @@ public Page<OrderHistDto> getOrderList(String email,Pageable pageable){
 		orderHistDtos.add(orderHistDto);
 	}
 	return new PageImpl<>(orderHistDtos,pageable,totalCount);
+}
+public boolean validateOrder(Long orderId,String email) {
+	Member curMember=memberRepository.findByEmail(email);
+	Order order=orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
+	Member savedMember=order.getMember();
+	if(!StringUtils.equals(curMember.getEmail(), savedMember.getEmail())) {
+		return false;
+	}
+	return true;
+}
+public void cancelOrder(Long orderId) {
+	Order order=orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
+	order.cancelOrder();
 }
 }

@@ -41,7 +41,7 @@ public @ResponseBody ResponseEntity order(@RequestBody @Valid OrderDto orderDto,
 		for(FieldError fieldError:fieldErros) {
 			sb.append(fieldError.getDefaultMessage());
 		}
-		System.out.println("firsterror");
+		
 		return new ResponseEntity<String>(sb.toString(),HttpStatus.BAD_REQUEST);
 	}
 	String email=principal.getName();
@@ -49,7 +49,7 @@ public @ResponseBody ResponseEntity order(@RequestBody @Valid OrderDto orderDto,
 	try {
 		orderId=orderService.order(orderDto, email);
 	}catch (Exception e) {
-		System.out.println("seconderror");
+		
 		return new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
 	}
 	return new ResponseEntity<Long>(orderId,HttpStatus.OK);
@@ -62,5 +62,14 @@ public String orderHist(@PathVariable("page")Optional<Integer> page,Principal pr
 	model.addAttribute("page",pageable.getPageNumber());
 	model.addAttribute("maxPage",5);
 	return "order/orderHist";
+}
+@PostMapping("/order/{orderId}/cancel")
+public @ResponseBody ResponseEntity cancelOrder(@PathVariable("orderId")Long orderId,Principal principal) {
+	if(!orderService.validateOrder(orderId,principal.getName())) {
+		return new ResponseEntity<String>("주문 취소 권한이 없습니다.",HttpStatus.BAD_REQUEST);
+	}
+	orderService.cancelOrder(orderId);
+	return new ResponseEntity<Long>(orderId,HttpStatus.OK);
+	
 }
 }

@@ -44,5 +44,8 @@ public static OrderItem createOrderItem(Item item,int count) {
 public int getTotalPrice() {
 	return orderPrice*count;
 }
+public void cancel() {
+	this.getItem().addStock(count);
+}
 
 }
